@@ -1,6 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-
+import 'dircode.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -13,8 +13,15 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       )),
-      body: Center(
-        child: Text('Welcome to the Home Screen!'),
+      body: Column(
+        children: [
+          Center(
+            child: TextButton(onPressed: () {
+              GetDowloads_Folder();
+              listMp3FilesInDownloads();
+            }, child: Text("Hi")),
+          ),
+        ],
       ),
     );
   }
