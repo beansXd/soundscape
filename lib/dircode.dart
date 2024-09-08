@@ -1,22 +1,17 @@
 import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:path/path.dart' as path;
 
-    Future<void> GetDowloads_Folder() async {
-        try{
-           var store=  await Permission.storage.request().isGranted;
-           print(store);
-        }
-            catch(x){
-
-
-            }
-
-
+Future<void> GetDowloads_Folder() async {
+  try {
+    var store = await Permission.storage.request().isGranted;
+    if (kDebugMode) {
+      print(store);
     }
-
-
+  } catch (x) {}
+}
 
 Future<Directory?> getDownloadsDirectory() async {
   if (Platform.isAndroid) {
@@ -41,8 +36,7 @@ Future<Directory?> getDownloadsDirectory() async {
   return null;
 }
 
-
-void listMp3FilesInDownloads() async {
+Future<List<FileSystemEntity>> listMp3FilesInDownloads() async {
   Directory? downloadsDirectory = await getDownloadsDirectory();
   if (downloadsDirectory != null) {
     List<FileSystemEntity> files = downloadsDirectory.listSync();
@@ -52,10 +46,13 @@ void listMp3FilesInDownloads() async {
       return file is File && file.path.endsWith('.mp3');
     }).toList();
 
-    for (var file in mp3Files) {
-      print(file.path);
-    }
+    // for (var file in mp3Files) {
+    //   print(file.path);
+    // }
+
+    return mp3Files;
   } else {
     print("Downloads directory not found.");
+    return [];
   }
 }
