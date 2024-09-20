@@ -14,6 +14,7 @@ Future<void> GetDowloads_Folder() async {
 }
 
 Future<Directory?> getDownloadsDirectory() async {
+  await GetDowloads_Folder();
   if (Platform.isAndroid) {
     Directory? directory = await getExternalStorageDirectory();
     if (directory != null) {
@@ -36,7 +37,7 @@ Future<Directory?> getDownloadsDirectory() async {
   return null;
 }
 
-Future<List<FileSystemEntity>> listMp3FilesInDownloads() async {
+Future<List> listMp3FilesInDownloads() async {
   Directory? downloadsDirectory = await getDownloadsDirectory();
   if (downloadsDirectory != null) {
     List<FileSystemEntity> files = downloadsDirectory.listSync();

@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:soundscape/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
