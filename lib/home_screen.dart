@@ -37,40 +37,43 @@ class HomeScreen extends StatelessWidget {
                     return ListView.builder(
                       itemCount: mp3Files.length,
                       itemBuilder: (context, index) {
-                        return Container(
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 10),
-                            // Set margins for the container.
-                            padding: const EdgeInsets.all(10),
-                            // Set padding inside the container.
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              // Set the background color.
-                              borderRadius: BorderRadius.circular(12),
-                              // Set border radius for rounded corners.
-                              boxShadow: [
-                                // Add a shadow effect.
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  // Shadow color with some opacity.
-                                  spreadRadius: 2,
-                                  // Spread radius of the shadow.
-                                  blurRadius: 5,
-                                  // Blur radius of the shadow.
-                                  offset: const Offset(
-                                      0, 3), // Offset position of the shadow.
-                                ),
-                              ],
-                            ),
-                            child: ListTile(
-                              title: Text(
-                                style: const TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black87),
-                                mp3Files[index].path.split('/').last,
+                        return InkWell(
+                          onTap: () {},
+                          child: Container(
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 10),
+                              // Set margins for the container.
+                              padding: const EdgeInsets.all(10),
+                              // Set padding inside the container.
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                // Set the background color.
+                                borderRadius: BorderRadius.circular(12),
+                                // Set border radius for rounded corners.
+                                boxShadow: [
+                                  // Add a shadow effect.
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    // Shadow color with some opacity.
+                                    spreadRadius: 2,
+                                    // Spread radius of the shadow.
+                                    blurRadius: 5,
+                                    // Blur radius of the shadow.
+                                    offset: const Offset(
+                                        0, 3), // Offset position of the shadow.
+                                  ),
+                                ],
                               ),
-                            ));
+                              child: ListTile(
+                                title: Text(
+                                  style: const TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black87),
+                                  mp3Files[index].path.split('/').last,
+                                ),
+                              )),
+                        );
 
                         // ListTile(title: Text(mp3Files[index].path.split('/').last));
                       },
