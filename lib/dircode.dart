@@ -50,6 +50,14 @@ Future<List> listMp3FilesInDownloads() async {
     // for (var file in mp3Files) {
     //   print(file.path);
     // }
+    List<String> cc= [];
+
+    for( int i= 0; i < mp3Files.length;   ){
+      cc.add(mp3Files[i].toString());
+
+       print(cc);
+       i++;
+    }
 
     return mp3Files;
   } else {
