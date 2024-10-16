@@ -52,10 +52,21 @@ Future<List> listMp3FilesInDownloads() async {
     // }
     List<String> cc= [];
 
+
+
+        Map <String, String > poop = {
+
+        };
     for( int i= 0; i < mp3Files.length;   ){
       cc.add(mp3Files[i].toString());
 
-       print(cc);
+       poop ={
+        mp3Files[i].path.split('/').last.substring(0, mp3Files[i].path.split('/').last.length - 4) : mp3Files[i].path
+      };
+
+
+       // print(cc);
+       print(poop);
        i++;
     }
 

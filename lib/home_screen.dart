@@ -38,7 +38,10 @@ class HomeScreen extends StatelessWidget {
                       itemCount: mp3Files.length,
                       itemBuilder: (context, index) {
                         return InkWell(
-                          onTap: () {},
+
+                          onTap: () {
+
+                          },
                           child: Container(
                               margin: const EdgeInsets.symmetric(
                                   vertical: 5, horizontal: 10),
@@ -65,12 +68,19 @@ class HomeScreen extends StatelessWidget {
                                 ],
                               ),
                               child: ListTile(
+                                onTap: () { mp3Files[index].toString();
+                                },
                                 title: Text(
                                   style: const TextStyle(
+
                                       fontSize: 13,
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black87),
-                                  mp3Files[index].path.split('/').last,
+                                    // path.split('/').last
+                                    // mp3Files[index].path.split('/').last.substring(0, mp3Files[index].path.split('/').last.length - 4)
+
+                                  mp3Files[index].path.split('/').last.substring(0, mp3Files[index].path.split('/').last.length - 4)
+                                  ,
                                 ),
                               )),
                         );
