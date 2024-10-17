@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 
 import 'dircode.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,11 +39,15 @@ class HomeScreen extends StatelessWidget {
                     return const Center(child: Text('No MP3 files found.'));
                   } else {
                     var mp3Files = snapshot.data!;
+                    var list = mp3Files.keys.toList();
                     return ListView.builder(
                       itemCount: mp3Files.length,
                       itemBuilder: (context, index) {
-                        return InkWell(
 
+
+
+
+                        return InkWell(
                           onTap: () {
 
                           },
@@ -68,24 +77,25 @@ class HomeScreen extends StatelessWidget {
                                 ],
                               ),
                               child: ListTile(
-                                onTap: () { mp3Files[index].toString();
-                                },
-                                title: Text(
-                                  style: const TextStyle(
+                                onTap: () {
 
+                                },
+
+                                title: Text(
+                                 list[index],
+
+
+                                  style: const TextStyle(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black87),
-                                    // path.split('/').last
-                                    // mp3Files[index].path.split('/').last.substring(0, mp3Files[index].path.split('/').last.length - 4)
 
-                                  mp3Files[index].path.split('/').last.substring(0, mp3Files[index].path.split('/').last.length - 4)
-                                  ,
+
                                 ),
                               )),
                         );
 
-                        // ListTile(title: Text(mp3Files[index].path.split('/').last));
+
                       },
                     );
                   }

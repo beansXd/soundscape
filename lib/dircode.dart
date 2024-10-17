@@ -37,7 +37,7 @@ Future<Directory?> getDownloadsDirectory() async {
   return null;
 }
 
-Future<List> listMp3FilesInDownloads() async {
+Future<Map<String, String>> listMp3FilesInDownloads() async {
   Directory? downloadsDirectory = await getDownloadsDirectory();
   if (downloadsDirectory != null) {
     List<FileSystemEntity> files = downloadsDirectory.listSync();
@@ -47,32 +47,27 @@ Future<List> listMp3FilesInDownloads() async {
       return file is File && file.path.endsWith('.mp3');
     }).toList();
 
-    // for (var file in mp3Files) {
-    //   print(file.path);
-    // }
-    List<String> cc= [];
 
 
-
-        Map <String, String > poop = {
-
-        };
-    for( int i= 0; i < mp3Files.length;   ){
-      cc.add(mp3Files[i].toString());
-
-       poop ={
-        mp3Files[i].path.split('/').last.substring(0, mp3Files[i].path.split('/').last.length - 4) : mp3Files[i].path
-      };
+    Map<String, String> poop = {};
+    for (int i = 0; i < mp3Files.length;) {
 
 
-       // print(cc);
-       print(poop);
-       i++;
+      String SongNames = mp3Files[i]
+          .path
+          .split('/')
+          .last
+          .substring(0, mp3Files[i].path.split('/').last.length - 4);
+      poop[SongNames] = mp3Files[i].path;
+
+      i++;
     }
 
-    return mp3Files;
+    return poop;
   } else {
-    print("Downloads directory not found.");
-    return [];
+    if (kDebugMode) {
+      print("Downloads directory not found.");
+    }
+    return {};
   }
 }
