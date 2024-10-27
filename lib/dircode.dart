@@ -49,21 +49,21 @@ Future<Map<String, String>> listMp3FilesInDownloads() async {
 
 
 
-    Map<String, String> poop = {};
+    Map<String, String> songMap = {};
     for (int i = 0; i < mp3Files.length;) {
 
 
-      String SongNames = mp3Files[i]
+      String songNames = mp3Files[i]
           .path
           .split('/')
           .last
           .substring(0, mp3Files[i].path.split('/').last.length - 4);
-      poop[SongNames] = mp3Files[i].path;
+      songMap[songNames] = mp3Files[i].path;
 
       i++;
     }
 
-    return poop;
+    return songMap;
   } else {
     if (kDebugMode) {
       print("Downloads directory not found.");

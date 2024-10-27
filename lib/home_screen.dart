@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:soundscape/Player_screen.dart';
 
 import 'dircode.dart';
 
@@ -49,6 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
                         return InkWell(
                           onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                              return Player(songName: list[index]);
+                            },));
 
                           },
                           child: Container(
@@ -77,9 +81,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ],
                               ),
                               child: ListTile(
-                                onTap: () {
 
-                                },
+
+
 
                                 title: Text(
                                  list[index],
