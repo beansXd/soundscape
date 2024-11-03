@@ -1,12 +1,41 @@
 import 'dart:io';
-
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 Future<void> GetDowloads_Folder() async {
+
+  var deviceInfoPlugin = await DeviceInfoPlugin();
+  final deviceInfo = await deviceInfoPlugin.deviceInfo;
+  var data= deviceInfo.data;
+  var androidVersion =  data["version" ]["release"];
+
+     int number;
   try {
-    var store = await Permission.storage.request().isGranted;
+     number = int.parse(androidVersion);
+
+     if(number <= 12){
+       await Permission.storage.request().isGranted;
+     }else{
+
+       Map<Permission, PermissionStatus> Permissions = await [
+         Permission.photos,
+         Permission.videos,
+         Permission.audio,
+         Permission.manageExternalStorage
+       ].request();
+
+     }
+    print(number);
+  } catch (e) {
+    print("Error: $e"); // Output: Error: FormatException: Invalid radix-10 number
+  }
+
+
+  try {
+    var store = await Permission.storage.request();
+    store.isDenied;
     if (kDebugMode) {
       print(store);
     }
@@ -62,7 +91,7 @@ Future<Map<String, String>> listMp3FilesInDownloads() async {
 
       i++;
     }
-    // fdfgdgfdg
+    
     return songMap;
   } else {
     if (kDebugMode) {

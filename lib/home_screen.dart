@@ -26,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
       )),
       body: Column(
         children: [
+
           Expanded(
             child: FutureBuilder(
                 future: listMp3FilesInDownloads(),
@@ -51,7 +52,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         return InkWell(
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(builder: (context) {
-                              return Player(songName: list[index]);
+                              print(list[index]);
+                                if (mp3Files.containsKey(list[index]) == true ) {
+                                  print("Map contains Key");
+                                 var checj=   mp3Files[list[index]];
+                                 print(checj);
+                                }else{
+                                  print("Key is not found");
+
+                                }
+
+                              return Player(songName: list[index], songPath: mp3Files[list[index]]  )    ;
                             },));
 
                           },

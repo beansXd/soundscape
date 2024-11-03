@@ -4,14 +4,16 @@ import 'package:flutter_svg/flutter_svg.dart'; // Import the SVG support package
 import 'package:lottie/lottie.dart'; // Import the Lottie animation package.
 import 'dart:async'; // Import Dart's async library for handling asynchronous operations.
 
-  main(){
-    runApp(Player(songName: "fuck"));
-  }
+
 
 class Player extends StatefulWidget {
   final String songName;
 
-  const Player({super.key, required this.songName});
+  final dynamic songPath;
+
+
+
+  const Player({super.key, required this.songName , required  this.songPath  });
 
   @override
   State<Player> createState() => _PlayerState();
@@ -19,7 +21,7 @@ class Player extends StatefulWidget {
 
 class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
   late AudioPlayer _audioPlayer; // Instance of AudioPlayer to play audio files.
-  late AudioCache _audioCache; // Instance of AudioCache to handle local audio assets.
+
   late AnimationController _animationController; // Controller for the Lottie animation.
   Duration _duration = Duration.zero; // Total duration of the audio file.
   Duration _position = Duration.zero; // Current position of the playback.
@@ -37,7 +39,7 @@ class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _audioPlayer = AudioPlayer(); // Initialize the audio player.
-    _audioCache = AudioCache(prefix: 'assets/'); // Initialize the audio cache with a prefix.
+
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 5),
@@ -101,22 +103,10 @@ class _PlayerState extends State<Player> with SingleTickerProviderStateMixin {
   }
 
   Future<void> play() async {
-    String path; // Variable to store the path of the audio file.
-    try {
-      // Determine the path based on the song name.
-      if (widget.songName == "Alkaline - Microwave") {
-        path = "Alkaline - Microwave (Official Audio)  Chimney Records  21st Hapilos (2017).mp3";
-      } else if (widget.songName == "Intence - Antisocial ") {
-        path = "Antisocial.mp3";
-      } else if (widget.songName == "Byron Messia - 90z") {
-        path = "90z.mp3";
-      } else {
-        path = "I Wonder.mp3";
-      }
 
-      // Load and play the audio file.
-      final file = await _audioCache.loadAsFile(path);
-      await _audioPlayer.play(DeviceFileSource(file.path));
+    try {
+
+      await _audioPlayer.play(DeviceFileSource(widget.songPath));
       setState(() {
         _isPlaying = true; // Update playing status.
       });
